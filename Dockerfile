@@ -22,7 +22,6 @@ RUN pnpm i use-debounce
 # Baue die Anwendung für die Produktion
 RUN pnpm run build
 
-
 EXPOSE 3000
 ENV PORT=3000
 # Starte die Anwendung

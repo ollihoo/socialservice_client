@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+    image: socialservices_frontend:${IMAGE_TAG}
+    ports:
+      - "3100:3000"
+    environment:
+      - NODE_ENV=production
+      - BACKEND_HOST=${BACKEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
+
