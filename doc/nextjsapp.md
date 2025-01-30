@@ -1,18 +1,13 @@
 # NextJs Application
 
-Install an example app with this command: 
-
-    npx create-next-app@latest nextjs-dashboard --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example" --use-pnpm
-
-Additional packages:
-
-    pnpm i use-debounce
-
-This is the response (if successfully done).
-
-Success! Created nextjs-dashboard at /Users/oliverhoogvliet/IdeaProjects/socialServices/nextjs-dashboard
-
 ## Some specialties of nextjs
+
+## Next structure
+
+    /app: Contains all the routes, components, and logic for your application, this is where you'll be mostly working from.
+    /app/lib: Contains functions used in your application, such as reusable utility functions and data fetching functions.
+    /app/ui: Contains all the UI components for your application, such as cards, tables, and forms. To save time, we've pre-styled these components for you.
+    /public: Contains all the static assets for your application, such as images.
 
 ### layout.tsx
 This fragment shows the layout of this page set. It's parent is layout.tsx in the root folder (nextjs-dashboard/app).
