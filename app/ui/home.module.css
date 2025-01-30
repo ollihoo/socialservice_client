@@ -14,7 +14,9 @@
 }
 
 .categorytag li {
-    background-color: lightgreen;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
     padding: 2px;
     border-block-style: solid;
     display: flex;

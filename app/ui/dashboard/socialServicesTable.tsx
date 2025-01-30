@@ -12,7 +12,7 @@ export default async function SocialServicesTable(params: any) {
         if (socialService.website != null) {
             return (
                 <p className="text-sm text-gray-500 sm:block">
-                    <Link href={socialService.website} target="_blank">Zum Angebot</Link>
+                    <Link href={socialService.website} target="_blank">Zum Angebot der Beratungsstelle</Link>
                 </p>
             )
         }
