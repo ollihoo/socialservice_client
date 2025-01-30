@@ -14,7 +14,7 @@ export default async function Page(props: { searchParams?: Promise<{ cat: string
   return (
       <main>
           <h1 className={`${lusitana.className} antialiased mb-4 text-xl md:text-2xl`}>
-              Dashboard
+              Beratungsstellen-Suche
           </h1>
         <div>
           <CategoriesDropdown categories={availableCategories} />
