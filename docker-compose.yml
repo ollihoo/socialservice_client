@@ -1,11 +1,9 @@
-version: '3.8'
-
 services:
 
   frontend:
     build:
       dockerfile: Dockerfile
-    image: socialservices_frontend:${IMAGE_TAG}
+    image: ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG}
     ports:
       - "3100:3000"
     environment:
