@@ -6,7 +6,7 @@ services:
       - "3100:3000"
     environment:
       - NODE_ENV=production
-      - BACKEND_HOST=${BACKEND_HOST}
+      - BACKEND_HOST=backend
       - BACKEND_PORT=${BACKEND_PORT}
 
   backend:
