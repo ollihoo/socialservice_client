@@ -1,5 +1,14 @@
 node_modules
 npm-debug.log
-Dockerfile
 .dockerignore
-.gitgnore
+.gitignore
+.git
+doc
+.env*
+create_release_with_docker.sh
+docker-compose.yml
+Dockerfile
+*.md
+*.iml
+.idea
+.next

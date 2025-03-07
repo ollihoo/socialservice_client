@@ -18,16 +18,16 @@ Config Files: You'll also notice config files such as next.config.js at the root
 files are created and pre-configured when you start a new project using create-next-app.
 
 # build docker container
+There are a bunch of files necessary for deployment:
 
-## Update tag
-Go to file **.env** und **update entry IMG_TAG** to appropriate version.
-This value is automatically used in docker compose. Check also **DOCKER_USER**.
+* [.dockerignore](.dockerignore) - This is intended for Dockerfile to ignore all files not to be copied into the Docker image
+* [create_release_with_docker.sh](create_release_with_docker.sh) - The script to publish a new version of this client 
+* [Dockerfile](Dockerfile) - how to build this Docker image
 
 ## Build and push image
 
     docker compose build
     docker push ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG}
-
 
 # More information
 * more about nextjs: see [here](./doc/nextjsapp.md)
