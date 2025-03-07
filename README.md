@@ -17,6 +17,9 @@ Run the built app in production mode:
 Config Files: You'll also notice config files such as next.config.js at the root of your application. Most of these
 files are created and pre-configured when you start a new project using create-next-app.
 
+# Development Environment
+
+
 # build docker container
 There are a bunch of files necessary for deployment:
 

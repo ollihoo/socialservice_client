@@ -1,8 +1,6 @@
 services:
 
   frontend:
-    build:
-      dockerfile: Dockerfile
     image: ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG}
     ports:
       - "3100:3000"
@@ -10,4 +8,9 @@ services:
       - NODE_ENV=production
       - BACKEND_HOST=${BACKEND_HOST}
       - BACKEND_PORT=${BACKEND_PORT}
+
+  backend:
+    image: ${DOCKER_USER}/socialservice_backend:0.1
+    ports:
+      - "8080:8080"
 
