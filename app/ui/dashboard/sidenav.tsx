@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import NavLinks from './nav-links';
-import AcmeLogo from '../acme-logo';
+import Logo from '../logo';
 
 export default function SideNav() {
   return (
@@ -8,7 +8,7 @@ export default function SideNav() {
       <Link
         className="mb-2 flex h-20 items-end justify-start rounded-md bg-red-800 p-4 md:h-40"
         href="/">
-        <div className="w-32 text-white md:w-40"><AcmeLogo /></div>
+        <div className="w-32 text-white md:w-40"><Logo /></div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
