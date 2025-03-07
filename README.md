@@ -1,38 +1,42 @@
-## Next.js App Frontend for Social Services
+# Next.js App Frontend for Social Services
 
-This app runs with pnpm. If it's installed on your development server, do so.
+## Development Environment
+This app runs with pnpm. If it's not installed on your development server yet, do so.
+It needs an backend server. This backend server is documented in docker-compose.yml.
 
-Start development version with this command:
+To start it, you should do (check your .env file first! IMAGE_TAG and DOCKER_USER are important):
+
+    docker compose up -d
+
+This also starts the frontend server. If this step runs without error. You can reach
+
+* __backend__ under http://localhost:8080/
+* __frontend__ under http://localhost:3100/
+
+To start the development version, go on with this command:
 
     pnpm run dev
 
-Build the app for production:
-
-    pnpm run build
-
-Run the built app in production mode:
-
-    pnpm start
-
-Config Files: You'll also notice config files such as next.config.js at the root of your application. Most of these
-files are created and pre-configured when you start a new project using create-next-app.
-
-# Development Environment
+To find out more about nextjs: see [here](./doc/nextjsapp.md). This app runs with React.
+More details, you can find [here](./doc/react.md). It also uses Tailwind that is documented 
+a bit more [here](./doc/tailwind.md).
 
 
-# build docker container
+## Deployment
 There are a bunch of files necessary for deployment:
 
 * [.dockerignore](.dockerignore) - This is intended for Dockerfile to ignore all files not to be copied into the Docker image
 * [create_release_with_docker.sh](create_release_with_docker.sh) - The script to publish a new version of this client 
 * [Dockerfile](Dockerfile) - how to build this Docker image
 
-## Build and push image
+### Build and push image
 
-    docker compose build
-    docker push ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG}
+Simply execute
 
-# More information
-* more about nextjs: see [here](./doc/nextjsapp.md)
-* more about react: see [here](./doc/react.md)
-* more about tailwind: see [here](./doc/tailwind.md)
+    ./create_release_with_docker.sh
+
+This script builds the image and pushes it to docker hub. 
+Please ensure to have set DOCKER_USER properly (see .env).
+
+## More information
+

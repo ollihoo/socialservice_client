@@ -20,3 +20,7 @@ This page contains the loading skeleton of this page. see more here: https://nex
 
 ### ui/skeletons.tsx
 Skeleton pages for async content loading
+
+Config Files: You'll also notice config files such as next.config.js at the root of your application. Most of these
+files are created and pre-configured when you start a new project using create-next-app.
+
