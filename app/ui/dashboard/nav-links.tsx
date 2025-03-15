@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  HomeIcon, EyeIcon,
+  HomeIcon, EyeIcon, ArrowUpTrayIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
@@ -9,6 +9,7 @@ import { clsx } from 'clsx';
 
 const navilinks = [
   { name: 'Beratungsstellen', href: '/dashboard', icon: HomeIcon },
+  { name: 'Das fehlt was?', href: '/adminservices', icon: ArrowUpTrayIcon },
   { name: 'Impressum', href: '/impressum', icon: EyeIcon },
 ];
 
