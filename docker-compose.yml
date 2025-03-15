@@ -1,7 +1,7 @@
 services:
 
   frontend:
-    image: ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG}
+    image: ${DOCKER_USER}/socialservices_frontend:${FE_IMAGE_TAG}
     ports:
       - "3100:3000"
     environment:
@@ -10,7 +10,9 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}
 
   backend:
-    image: ${DOCKER_USER}/socialservice_backend:0.1
+    image: ${DOCKER_USER}/socialservice_backend:${BE_IMAGE_TAG}
     ports:
       - "8080:8080"
+    volumes:
+      -
 
