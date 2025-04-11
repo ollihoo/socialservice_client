@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: "jdbc:sqlite:/app/socialservices.db"
+
+application:
+  tsv:
+    path: file:/app/conf/Beratungsstellen.tsv

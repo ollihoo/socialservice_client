@@ -1,10 +1,27 @@
 # Next.js App Frontend for Social Services
 
-## Development Environment
-This app runs with pnpm. If it's not installed on your development server yet, do so.
-It needs an backend server. This backend server is documented in docker-compose.yml.
+## How to start
+To start this application, please do the following steps:
 
-To start it, you should do (check your .env file first! IMAGE_TAG and DOCKER_USER are important):
+    cp .env.example .env
+
+Edit these entries in .env as follows. Ask your fellows for the right repo:
+
+    DOCKER_USER=<needed docker rpo>
+    FE_IMAGE_TAG=2504100940
+    BE_IMAGE_TAG=arm_2504110620
+
+IMPORTANT: check for the most up-to-date version. If you work on 
+MacOS, you need to use the tags beginning with arm_. For linux 
+environments there is no prefix in use.
+
+To see the basics, activate basic data configuration for the backend:
+
+    cd ./docker/backend
+    cp Beratungsstellen_TEMPLATE.tsv Beratungsstellen.csv
+
+This tsv file is just an very basic example. Ask your fellows, where to get complete data. 
+With this configuration, you can now start frontend and backend with
 
     docker compose up -d
 
@@ -13,6 +30,11 @@ This also starts the frontend server. If this step runs without error. You can r
 * __backend__ under http://localhost:8080/
 * __frontend__ under http://localhost:3100/
 
+
+## Development Environment
+This app runs with pnpm. If it's not installed on your development server yet, do so.
+It needs an backend server. This backend server is documented in docker-compose.yml.
+
 To start the development version, go on with this command:
 
     pnpm run dev
@@ -20,7 +42,6 @@ To start the development version, go on with this command:
 To find out more about nextjs: see [here](./doc/nextjsapp.md). This app runs with React.
 More details, you can find [here](./doc/react.md). It also uses Tailwind that is documented 
 a bit more [here](./doc/tailwind.md).
-
 
 ## Deployment
 There are a bunch of files necessary for deployment:

@@ -11,8 +11,10 @@ services:
 
   backend:
     image: ${DOCKER_USER}/socialservice_backend:${BE_IMAGE_TAG}
+    volumes:
+      - "./docker/backend/application-docker.yml:/app/conf/application-docker.yml"
+      - "./docker/backend/Beratungsstellen.tsv:/app/conf/Beratungsstellen.tsv"
     ports:
       - "8080:8080"
-    volumes:
-      -
+
 
