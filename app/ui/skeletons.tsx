@@ -94,7 +94,7 @@ export default function DashboardSkeleton() {
         <CardSkeleton />
         <CardSkeleton />
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <RevenueChartSkeleton />
         <LatestInvoicesSkeleton />
       </div>
@@ -166,7 +166,7 @@ export function InvoicesMobileSkeleton() {
 export function InvoicesTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
+      <div className="inline-block w-full min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
             <InvoicesMobileSkeleton />

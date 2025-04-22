@@ -9,7 +9,7 @@ import { clsx } from 'clsx';
 
 const navilinks = [
   { name: 'Beratungsstellen', href: '/dashboard', icon: HomeIcon },
-  { name: 'Das fehlt was?', href: '/adminservices', icon: ArrowUpTrayIcon },
+  { name: 'Da fehlt was?', href: '/adminservices', icon: ArrowUpTrayIcon },
   { name: 'Impressum', href: '/impressum', icon: EyeIcon },
 ];
 
