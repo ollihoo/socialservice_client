@@ -91,7 +91,7 @@ export type InvoiceForm = {
 export type Category = {
   id: number;
   name: string;
-}
+};
 
 export type SocialService = {
   id: string;
@@ -100,5 +100,5 @@ export type SocialService = {
   postCode: string;
   city: string;
   website: string;
-  categories:Category[];
+  categories: Category[];
 };

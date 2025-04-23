@@ -1,9 +1,9 @@
-"use client";
-import {Category} from "../lib/definitions";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+'use client';
+import { Category } from '../lib/definitions';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function CategoriesDropdown({ categories }: { categories: Category[] }) {
-  const QUERY_PARAM = "cat";
+  const QUERY_PARAM = 'cat';
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -21,15 +21,24 @@ export default function CategoriesDropdown({ categories }: { categories: Categor
   return (
     <div className="relative flex flex-1 flex-shrink-0">
       <div>
-        <label htmlFor="categoryDropdown" className="sr-only">Choose a category;</label>
-        <select id="categoryDropdown" value={searchParams.get(QUERY_PARAM)?.toString()}
-                onChange={handleSelection}>
-          <option value="" disabled>Select a category</option>
-          {
-            categories.map((category: Category) => {
-              return (<option key={category.id} value={category.id}>{category.name}</option>);
-            })
-          }
+        <label htmlFor="categoryDropdown" className="sr-only">
+          Choose a category;
+        </label>
+        <select
+          id="categoryDropdown"
+          value={searchParams.get(QUERY_PARAM)?.toString()}
+          onChange={handleSelection}
+        >
+          <option value="" disabled>
+            Select a category
+          </option>
+          {categories.map((category: Category) => {
+            return (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>

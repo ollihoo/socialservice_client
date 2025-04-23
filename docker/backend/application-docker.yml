@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: "jdbc:sqlite:/app/socialservices.db"
+    url: 'jdbc:sqlite:/app/socialservices.db'
 
 application:
   tsv:

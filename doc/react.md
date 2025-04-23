@@ -9,7 +9,7 @@ Think in components, like a button (MyButton). Capital letters show React compon
     </button>
     );
     }
-    
+
     export default function MyApp() {
     return (
     <div>
@@ -22,11 +22,11 @@ export default -> main component in this file.
 JSX = markup syntax used by react. It's stricter than html.
 
 JSX can't return multiple JSX tags. If so, you have to wrap them
-with 
+with
 
     `<div>..</div>` or `<>..</>`.
 
-`className` is the attribute to add CSS. It works the same 
+`className` is the attribute to add CSS. It works the same
 way as `class=""`
 
 To use Javascript in JSX, use `{...}`
@@ -48,7 +48,7 @@ To use Javascript in JSX, use `{...}`
 Updating in screen with state
 
     import { useState } from 'react';
-    
+
     export default function MyApp() {
         return (
             <div>
@@ -58,18 +58,17 @@ Updating in screen with state
             </div>
         );
     }
-    
+
     function MyButton() {
         const [count, setCount] = useState(0);
-    
+
         function handleClick() {
             setCount(count + 1);
         }
-    
+
         return (
             <button onClick={handleClick}>
                 Clicked {count} times
             </button>
         );
     }
-
