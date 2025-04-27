@@ -1,68 +1,85 @@
-import {Category, SocialService} from '../../lib/definitions';
-import Link from "next/link";
-import { fetchSocialServices} from "../../lib/data";
-import styles from "../home.module.css";
-
+import { Category, SocialService } from '../../lib/definitions';
+import Link from 'next/link';
+import { fetchSocialServices } from '../../lib/data';
 
 export default async function SocialServicesTable(params: any) {
-    const category: string = params?.category || '';
-    const unsortedSocialservices = await fetchSocialServices(category);
-    const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
-    function getServiceLink(socialService: SocialService) {
-        if (socialService.website != null) {
-            return (
-                <p className="text-sm text-gray-500 sm:block">
-                    <Link href={socialService.website} target="_blank">Zum Angebot der Beratungsstelle</Link>
-                </p>
-            )
-        }
-        return ``;
-    }
+  const category: string = params?.category || '';
+  const unsortedSocialservices = await fetchSocialServices(category);
+  const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
 
-    function showCategories(socialService: SocialService) {
-        const sortedCategories = socialService.categories.sort((a, b) => a.name.localeCompare(b.name));
-        return (
-          <ul className={styles.categorytag}>
-              {
-                  sortedCategories.map((entry: Category) => {
-                     return (<li key={entry.id}>{entry.name}</li>);
-                  })
-              }
-          </ul>
-        );
+  function getServiceLink(socialService: SocialService) {
+    if (socialService.website != null) {
+      return (
+        <span className="text-sm text-gray-500 sm:block">
+          <Link className="underline" href={socialService.website} target="_blank">
+            Zum Angebot der Beratungsstelle
+          </Link>
+        </span>
+      );
     }
+    return ``;
+  }
 
-    function getListOfServices(socialServices: SocialService[]) {
-        return <>
-            {socialServices.map((socialservice) => {
-                return (
-                    <div key={socialservice.id}
-                        className="flex flex-row justify-between py-2 md:grid-cols-4'">
-                        <div className="flex flex-col">
-                            <p className="truncate text-sm font-semibold md:text-base">
-                                {socialservice.name}
-                            </p>
-                            <p className="truncate md:text-base">
-                                {socialservice.address}, {socialservice.postCode} {socialservice.city}
-                            </p>
-                            {getServiceLink(socialservice)}
-                        </div>
-                        <div className="flex flex-col items-center justify-center">
-                            {showCategories(socialservice)}
-                        </div>
-                    </div>
-                );
-            })}
-        </>;
-    }
+  function showCategories(socialService: SocialService) {
+    const sortedCategories = socialService.categories.sort((a, b) => a.name.localeCompare(b.name));
+    const firstCategories = sortedCategories.slice(0, 2);
 
     return (
-        <div className="flex w-full flex-col md:col-span-8">
-            <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
-                <div className="bg-white px-6">
-                    {getListOfServices(socialServices)}
-                </div>
+      <>
+        {firstCategories.map((entry: Category) => (
+          <span
+            key={entry.id}
+            className="rounded-md bg-[#8B2500] px-4 py-1 text-sm text-white sm:text-base"
+          >
+            {entry.name}
+          </span>
+        ))}
+
+        {sortedCategories.length >= 3 && (
+          <span className="group rounded-md bg-[#8B2500] px-4 py-1 text-sm text-white sm:text-base">
+            ...
+            <div className="absolute left-1/2 top-full z-50 mb-2 w-full -translate-x-1/2 transform rounded bg-gray-800 px-2 py-2 text-sm text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+              <div className="flex flex-wrap gap-2">
+                {sortedCategories.map((entry: Category) => (
+                  <span
+                    className="mb-1 rounded-md bg-[#8B2500] px-4 py-1 text-sm text-white last:mb-0 sm:text-base"
+                    key={entry.id}
+                  >
+                    {entry.name}
+                  </span>
+                ))}
+              </div>
             </div>
-        </div>
+          </span>
+        )}
+      </>
     );
+  }
+
+  function getListOfServices(socialServices: SocialService[]) {
+    return (
+      <>
+        {socialServices.map((socialservice) => {
+          return (
+            <div className="col-span-1" key={socialservice.id}>
+              <div className="flex grow flex-col justify-between rounded-xl">
+                <div className="bg-white">
+                  <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
+                    <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{socialservice.name}</h2>
+                    <p className="mb-1 text-xl">
+                      {socialservice.address}, {socialservice.postCode} {socialservice.city}
+                    </p>
+                    <p className="mb-4 text-gray-600">{getServiceLink(socialservice)}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+
+  return <>{getListOfServices(socialServices)}</>;
 }
