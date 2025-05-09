@@ -3,7 +3,7 @@ import { City } from '../lib/definitions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function CitiesDropdown({ cities }: { cities: City[] }) {
-  const QUERY_PARAM = 'cat';
+  const QUERY_PARAM = 'cit';
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();

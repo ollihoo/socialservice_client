@@ -1,7 +1,8 @@
 import {Category, City, SocialService} from './definitions';
 import {createUrl, doAPICall} from './utils';
+import * as console from "node:console";
 
-export async function fetchSocialServices(category: string) {
+export async function fetchSocialServices(category: string, city: string) {
   function createSocialServices(input: any) {
     const resultSocialServices: SocialService[] = input.map((item: any) => {
       return {
@@ -17,10 +18,11 @@ export async function fetchSocialServices(category: string) {
     return resultSocialServices;
   }
 
-  const request = createUrl('/social') + (category ? '?c=' + category : '');
+  const request = createUrl('/social') + (category ? '?c=' + category : '') + (city ? '&ct=' + city : '');
+  console.log(request);
   const result = await doAPICall(request);
-  const data = await result.json();
-  return createSocialServices(data);
+
+  return createSocialServices(await result.json());
 }
 
 export async function fetchCategories() {

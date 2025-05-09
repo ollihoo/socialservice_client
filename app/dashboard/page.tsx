@@ -9,7 +9,8 @@ import {fetchCategories, fetchCities} from '../lib/data';
 
 export default async function Page(props: { searchParams?: Promise<{ cat: string, cit: string }> }) {
   const searchParams = await props.searchParams;
-  const searchCategory: string = searchParams?.cat || '';
+  const selectedCategory: string = searchParams?.cat || '';
+  const selectedCity: string = searchParams?.cit || '';
   const availableCategories: Category[] = await fetchCategories();
   const availableCities: City[] = await fetchCities();
 
@@ -24,7 +25,7 @@ export default async function Page(props: { searchParams?: Promise<{ cat: string
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         <Suspense fallback={<RevenueChartSkeleton />}>
-          <SocialServicesTable category={searchCategory} />
+          <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
         </Suspense>
       </div>
     </main>
