@@ -1,9 +1,9 @@
 'use client';
-import { Category } from '../lib/definitions';
+import { City } from '../lib/definitions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export default function CategoriesDropdown({ categories }: { categories: Category[] }) {
-  const QUERY_PARAM = 'cat';
+export default function CitiesDropdown({ cities }: { cities: City[] }) {
+  const QUERY_PARAM = 'cit';
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -29,13 +29,13 @@ export default function CategoriesDropdown({ categories }: { categories: Categor
           value={searchParams.get(QUERY_PARAM)?.toString()}
           onChange={handleSelection}
         >
-          <option>
-            Gesuchte Kategorie
+          <option value="">
+            Welche Stadt?
           </option>
-          {categories.map((category: Category) => {
+          {cities.map((city: City) => {
             return (
-              <option key={category.id} value={category.id}>
-                {category.name}
+              <option key={city.id} value={city.id}>
+                {city.name}
               </option>
             );
           })}

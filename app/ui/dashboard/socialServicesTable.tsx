@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { fetchSocialServices } from '../../lib/data';
 
 export default async function SocialServicesTable(params: any) {
-  const category: string = params?.category || '';
-  const unsortedSocialservices = await fetchSocialServices(category);
+  const selCategory: string = params?.category || '';
+  const selCity: string = params?.city || '';
+  const unsortedSocialservices = await fetchSocialServices(selCategory, selCity);
   const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
 
   function getServiceLink(socialService: SocialService) {
