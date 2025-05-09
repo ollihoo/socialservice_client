@@ -3,21 +3,24 @@ import SocialServicesTable from '../ui/dashboard/socialServicesTable';
 import { Suspense } from 'react';
 import { RevenueChartSkeleton } from '../ui/skeletons';
 import CategoriesDropdown from '../ui/categoriesDropdown';
-import { Category } from '../lib/definitions';
-import { fetchCategories } from '../lib/data';
+import CitiesDropDown from '../ui/citiesDropdown';
+import { Category, City } from '../lib/definitions';
+import {fetchCategories, fetchCities} from '../lib/data';
 
-export default async function Page(props: { searchParams?: Promise<{ cat: string }> }) {
+export default async function Page(props: { searchParams?: Promise<{ cat: string, cit: string }> }) {
   const searchParams = await props.searchParams;
   const searchCategory: string = searchParams?.cat || '';
   const availableCategories: Category[] = await fetchCategories();
+  const availableCities: City[] = await fetchCities();
 
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl antialiased md:text-2xl`}>
-        Beratungsstellen-Suche
+        Beratungsstellen
       </h1>
       <div>
         <CategoriesDropdown categories={availableCategories} />
+        in <CitiesDropDown cities={availableCities} />
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         <Suspense fallback={<RevenueChartSkeleton />}>
