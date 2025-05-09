@@ -1,6 +1,5 @@
 import {Category, City, SocialService} from './definitions';
 import {createUrl, doAPICall} from './utils';
-import * as console from "node:console";
 
 export async function fetchSocialServices(category: string, city: string) {
   function createSocialServices(input: any) {
