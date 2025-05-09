@@ -18,8 +18,11 @@ export async function fetchSocialServices(category: string, city: string) {
     return resultSocialServices;
   }
 
+  if (! category) {
+    return [];
+  }
+
   const request = createUrl('/social') + (category ? '?c=' + category : '') + (city ? '&ct=' + city : '');
-  console.log(request);
   const result = await doAPICall(request);
 
   return createSocialServices(await result.json());
