@@ -29,8 +29,8 @@ export default function CategoriesDropdown({ categories }: { categories: Categor
           value={searchParams.get(QUERY_PARAM)?.toString()}
           onChange={handleSelection}
         >
-          <option value="" disabled>
-            Select a category
+          <option>
+            Gesuchte Kategorie
           </option>
           {categories.map((category: Category) => {
             return (
