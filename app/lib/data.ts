@@ -1,32 +1,7 @@
-import { Category, InvoicesTable, SocialService } from './definitions';
+import {Category, City, SocialService} from './definitions';
+import {createUrl, doAPICall} from './utils';
 
-export function fetchFilteredInvoices(query: string, currentPage: number) {
-  console.log('Query: ' + query + '; currentPage: ' + currentPage);
-  const data: InvoicesTable[] = [];
-  data.push({
-    id: 'aaaaaaaaaa',
-    name: 'Mr. Smith',
-    image_url: '/wespe.jpg',
-    email: 'alan@smith.org',
-    amount: 240000,
-    customer_id: 'werewww',
-    status: 'pending',
-    date: '2024-11-12',
-  });
-  return data;
-}
-
-export async function fetchInvoicesPages(query: string) {
-  console.log('request for page ' + query);
-  // another request for the pagination to the database?? ;-(
-  // simulating, that it's two pages...
-  return 2;
-}
-
-export async function fetchSocialServices(category: string) {
-  const backend = 'http://' + process.env.BACKEND_HOST + ':' + process.env.BACKEND_PORT + '/social';
-  const request = category ? '?c=' + category : '';
-
+export async function fetchSocialServices(category: string, city: string) {
   function createSocialServices(input: any) {
     const resultSocialServices: SocialService[] = input.map((item: any) => {
       return {
@@ -42,20 +17,14 @@ export async function fetchSocialServices(category: string) {
     return resultSocialServices;
   }
 
-  let res;
-  try {
-    res = await fetch(backend + request, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await res.json();
-    return createSocialServices(data);
-  } catch (error: any) {
-    console.log('request problem: ', error.message);
-    console.log('URL: ', backend);
+  if (! category) {
     return [];
   }
+
+  const request = createUrl('/social') + (category ? '?c=' + category : '') + (city ? '&ct=' + city : '');
+  const result = await doAPICall(request);
+
+  return createSocialServices(await result.json());
 }
 
 export async function fetchCategories() {
@@ -69,21 +38,21 @@ export async function fetchCategories() {
     return categories;
   }
 
-  let result;
-  const requestUrl =
-    'http://' + process.env.BACKEND_HOST + ':' + process.env.BACKEND_PORT + '/categories';
+  const result = await doAPICall(createUrl('/categories'));
+  return createCategories(await result.json());
+}
 
-  try {
-    result = await fetch(requestUrl, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+export async function fetchCities() {
+  function createCategories(input: any) {
+    const cities: City[] = input.map((item: any) => {
+      return {
+        id: item.id,
+        name: item.name,
+      };
     });
-  } catch (error: any) {
-    console.log('categories problem: ', error.message);
-    console.log('URL: ', requestUrl);
-    return [];
+    return cities;
   }
-  const data = await result.json();
-  return createCategories(data);
+
+  const result = await doAPICall(createUrl("/cities"));
+  return createCategories(await result.json());
 }
