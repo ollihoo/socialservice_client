@@ -1,10 +1,5 @@
 import {NEVER, z} from "zod";
 
-export type Revenue = {
-  month: string;
-  revenue: number;
-};
-
 export type Category = {
   id: number;
   name: string;
