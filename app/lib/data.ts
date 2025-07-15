@@ -1,7 +1,8 @@
-import {Category, City, SocialService} from './definitions';
+import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from './definitions';
 import {createUrl, doAPICall} from './utils';
 
-export async function fetchSocialServices(category: string, city: string) {
+export async function fetchSocialServices(category: string, cityId: string) {
+
   function createSocialServices(input: any) {
     const resultSocialServices: SocialService[] = input.map((item: any) => {
       return {
@@ -17,17 +18,23 @@ export async function fetchSocialServices(category: string, city: string) {
     return resultSocialServices;
   }
 
-  if (! category) {
+  const requestParameters = SocialServicesRequest.safeParse(
+    { categoryId: category, cityId: cityId }
+  );
+
+  if (requestParameters.success) {
+    const request = createUrl('/social?ct=')
+      + requestParameters.data.cityId
+      + '&c=' + requestParameters.data.categoryId;
+    const result = await doAPICall(request);
+    return createSocialServices(await result.json());
+  } else {
+    console.log("ERROR: "+requestParameters.error.message);
     return [];
   }
-
-  const request = createUrl('/social') + (category ? '?c=' + category : '') + (city ? '&ct=' + city : '');
-  const result = await doAPICall(request);
-
-  return createSocialServices(await result.json());
 }
 
-export async function fetchCategories() {
+export async function fetchCategories(cityId: any) {
   function createCategories(input: any) {
     const categories: Category[] = input.map((item: any) => {
       return {
@@ -38,8 +45,18 @@ export async function fetchCategories() {
     return categories;
   }
 
-  const result = await doAPICall(createUrl('/categories'));
-  return createCategories(await result.json());
+  const requestParameters = CategoriesRequest.safeParse(
+    { cityId: cityId }
+  );
+
+  if (requestParameters.success) {
+    const request = createUrl('/categories') + '?ct=' + requestParameters.data.cityId;
+    const result = await doAPICall(request);
+    return createCategories(await result.json());
+  } else {
+    console.log("ERROR: "+requestParameters.error.message);
+    return [];
+  }
 }
 
 export async function fetchCities() {

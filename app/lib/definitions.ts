@@ -1,3 +1,5 @@
+import {NEVER, z} from "zod";
+
 export type Revenue = {
   month: string;
   revenue: number;
@@ -22,3 +24,36 @@ export type SocialService = {
   website: string;
   categories: Category[];
 };
+
+export const SocialServicesRequest = z.object({
+  categoryId: z.string().transform( (val, ctx) => {
+    try {
+      const n= Number.parseInt(val);
+      if (n.toString() == val) { return n; }
+      throw new Error("input is not a number");
+    } catch (e) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Not a number",
+      });
+      return NEVER;
+    }
+  }),
+  cityId: z.coerce.bigint(),
+});
+
+export const CategoriesRequest = z.object({
+  cityId: z.string().transform( (val, ctx) => {
+    try {
+      const n= Number.parseInt(val);
+      if (n.toString() == val) { return n; }
+      throw new Error("input is not a number");
+    } catch (e) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Not a number",
+      });
+      return NEVER;
+    }
+  }),
+});
