@@ -1,4 +1,4 @@
-import {NEVER, z} from "zod";
+import {NEVER, RefinementCtx, z} from "zod";
 
 export type Category = {
   id: number;
@@ -20,35 +20,33 @@ export type SocialService = {
   categories: Category[];
 };
 
-export const SocialServicesRequest = z.object({
-  categoryId: z.string().transform( (val, ctx) => {
+function addMessageToCtx(ctx: RefinementCtx, message: string) {
+  ctx.addIssue({
+    code: "custom",
+    message: message,
+  });
+}
+
+function getStringToIntTransformer() {
+  return z.string().transform((val, ctx) => {
     try {
-      const n= Number.parseInt(val);
-      if (n.toString() == val) { return n; }
-      throw new Error("input is not a number");
+      const n = Number.parseInt(val);
+      if (n.toString() == val) {
+        return n;
+      }
     } catch (e) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Not a number",
-      });
-      return NEVER;
     }
-  }),
-  cityId: z.coerce.bigint(),
+    addMessageToCtx(ctx, "Not a number");
+    return NEVER;
+  });
+}
+
+export const SocialServicesRequest = z.object({
+  categoryId: getStringToIntTransformer(),
+  cityId: getStringToIntTransformer(),
 });
 
+
 export const CategoriesRequest = z.object({
-  cityId: z.string().transform( (val, ctx) => {
-    try {
-      const n= Number.parseInt(val);
-      if (n.toString() == val) { return n; }
-      throw new Error("input is not a number");
-    } catch (e) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Not a number",
-      });
-      return NEVER;
-    }
-  }),
+  cityId: getStringToIntTransformer(),
 });
