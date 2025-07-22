@@ -46,7 +46,6 @@ export const SocialServicesRequest = z.object({
   cityId: getStringToIntTransformer(),
 });
 
-
 export const CategoriesRequest = z.object({
   cityId: getStringToIntTransformer(),
 });
