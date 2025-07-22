@@ -34,7 +34,7 @@ export async function fetchSocialServices(category: string, cityId: string) {
 }
 
 export async function fetchCategories(cityId: any) {
-  function transformJsonIntoCategoryList(input: any) {
+  const transformJsonIntoCategoryList = function (input: any) {
     const categories: Category[] = input.map((item: any) => {
       return {
         id: item.id,
@@ -42,7 +42,7 @@ export async function fetchCategories(cityId: any) {
       };
     });
     return categories;
-  }
+  };
 
   const requestParameters = CategoriesRequest.safeParse(
     { cityId: cityId }
