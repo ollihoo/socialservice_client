@@ -1,5 +1,6 @@
 import {Category, City, SocialService} from './definitions';
 import {createUrl, doAPICall} from './utils';
+import {atLeastOneTask} from "next/dist/lib/scheduler";
 
 export async function fetchSocialServices(category: string, city: string) {
   function createSocialServices(input: any) {
@@ -43,16 +44,20 @@ export async function fetchCategories() {
 }
 
 export async function fetchCities() {
-  function createCategories(input: any) {
+  function createCities(input: any) {
     const cities: City[] = input.map((item: any) => {
+      let lat = (item.latitude !== undefined)? item.latitude:null;
+      let lng = (item.longitude !== undefined)? item.longitude:null;
       return {
         id: item.id,
         name: item.name,
+        lat: lat,
+        long: lng,
       };
     });
     return cities;
   }
 
   const result = await doAPICall(createUrl("/cities"));
-  return createCategories(await result.json());
+  return createCities(await result.json());
 }
