@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Logo from './ui/logo';
+import Map from './ui/map';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import dynamic from "next/dynamic";
 
 export default function Page() {
   return (
@@ -20,13 +22,7 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/*          <Image
-              src="/hero-desktop.png"
-              width={1000}
-              height={760}
-              className="hidden md:block"
-              alt="Screenshots of the dashboard project showing desktop version"
-          /> */}
+          <Map />
         </div>
       </div>
     </main>
