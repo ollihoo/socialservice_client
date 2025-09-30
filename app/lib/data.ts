@@ -1,6 +1,5 @@
 import {Category, City, SocialService} from './definitions';
 import {createUrl, doAPICall} from './utils';
-import {atLeastOneTask} from "next/dist/lib/scheduler";
 
 export async function fetchSocialServices(category: string, city: string) {
   function createSocialServices(input: any) {

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Logo from './ui/logo';
 import Map from './ui/map';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import dynamic from "next/dynamic";
 
 export default function Page() {
   return (
