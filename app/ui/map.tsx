@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Fix für fehlendes Marker-Icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
@@ -14,7 +13,7 @@ L.Icon.Default.mergeOptions({
 
 export default function Map() {
   return (
-    <MapContainer center={[52.52, 13.405]} zoom={13} style={{ height: '100%', width: '100%' }}>
+    <MapContainer center={[51.5354, 9.920]} zoom={6} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
