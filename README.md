@@ -9,8 +9,8 @@ To start this application, please do the following steps:
 Edit these entries in .env as follows. Ask your fellows for the right repo:
 
     DOCKER_USER=<needed docker rpo>
-    FE_IMAGE_TAG=2504100940
-    BE_IMAGE_TAG=arm_2504110620
+    FE_IMAGE_TAG=xxx
+    BE_IMAGE_TAG=yyy
 
 IMPORTANT: check for the most up-to-date version. If you work on
 MacOS, you need to use the tags beginning with arm\_. For linux

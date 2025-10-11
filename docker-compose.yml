@@ -1,13 +1,6 @@
 services:
   frontend:
-    build:
-      context: . #if your Dockerfile is not at the same level change the path here (./frontend)
-    restart: always
-    command: pnpm dev
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+    image: docker.io/${DOCKER_USER}/socialservices_frontend:${FE_IMAGE_TAG}
     ports:
       - '3100:3000'
     environment:
@@ -18,7 +11,6 @@ services:
   backend:
     image: ${DOCKER_USER}/socialservice_backend:${BE_IMAGE_TAG}
     volumes:
-      - './docker/backend/application-docker.yml:/app/conf/application-docker.yml'
-      - './docker/backend/Beratungsstellen.tsv:/app/conf/Beratungsstellen.tsv'
+      - './docker/backend:/app/conf:rw'
     ports:
       - '8080:8080'

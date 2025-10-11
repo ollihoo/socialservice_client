@@ -1,7 +1,25 @@
+management:
+  influx:
+    metrics:
+      export:
+        enabled: false
+
 spring:
   datasource:
-    url: 'jdbc:sqlite:/app/socialservices.db'
+    url: 'jdbc:sqlite:/app/conf/db/socialservices.db'
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: false
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+  flyway:
+    baseline-on-migrate: true
 
 application:
   tsv:
-    path: file:/app/conf/Beratungsstellen.tsv
+    pattern: file:/app/conf/input/*.tsv
+  osm:
+    cache:
+      path: file:/app/conf/osm_cache/
