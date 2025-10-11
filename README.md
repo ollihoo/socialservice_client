@@ -18,7 +18,7 @@ environments there is no prefix in use.
 
 To see the basics, activate basic data configuration for the backend:
 
-    cd ./docker/backend
+    cd ./docker/backend/input
     cp Beratungsstellen_TEMPLATE.tsv Beratungsstellen.csv
 
 This tsv file is just an very basic example. Ask your fellows, where to get complete data.
@@ -60,5 +60,3 @@ Simply execute
 
 This script builds the image and pushes it to docker hub.
 Please ensure to have set DOCKER_USER properly (see .env).
-
-## More information
