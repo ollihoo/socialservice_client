@@ -41,7 +41,6 @@ function parseInputFormConfiguration(config: any, inputForms: Map<string,URL>) {
   Object.keys(config).forEach(key => {
     try {
       inputForms.set(key, new URL(config[key]));
-      console.log(config[key]);
     } catch (error: any) {
       console.log('Form configuration is buggy: ', error.message);
     }
