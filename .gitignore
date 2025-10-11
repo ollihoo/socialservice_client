@@ -35,6 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/docker/backend/Beratungsstellen.tsv
+/docker/backend/*
+!/docker/backend/application-docker.yml
+!/docker/backend/db/DB
+!/docker/backend/osm-cache/CACHE
 /.idea/
 .idea/*
