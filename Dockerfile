@@ -1,4 +1,4 @@
-FROM node:23-alpine AS base
+FROM node:24-alpine
 RUN apk add --no-cache python3 py3-pip
 RUN apk add --no-cache make g++ libc6-compat
 RUN npm install -g pnpm
