@@ -1,7 +1,7 @@
 import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from './definitions';
 import {createUrl, doAPICall} from './utils';
 
-export async function fetchSocialServices(category: string, cityId: string) {
+export async function fetchSocialServices(categoryId: string, cityId: string) {
 
   function transformJsonIntoSocialServicesList(input: any) {
     const resultSocialServices: SocialService[] = input.map((item: any) => {
@@ -19,7 +19,7 @@ export async function fetchSocialServices(category: string, cityId: string) {
   }
 
   const requestParameters = SocialServicesRequest.safeParse(
-    { categoryId: category, cityId: cityId }
+    { categoryId: categoryId, cityId: cityId }
   );
 
   if (requestParameters.success) {
@@ -28,7 +28,11 @@ export async function fetchSocialServices(category: string, cityId: string) {
     const result = await doAPICall(request);
     return transformJsonIntoSocialServicesList(await result.json());
   } else {
-    console.log("SocialServices: "+requestParameters.error.message);
+    if (cityId != undefined && cityId !== '') {
+      if (categoryId != undefined && categoryId !== '') {
+        console.warn("Stop by parameters while requesting socialservices: ", categoryId, "; ", cityId);
+      }
+    }
     return [];
   }
 }
@@ -53,7 +57,9 @@ export async function fetchCategories(cityId: any) {
     const result = await doAPICall(request);
     return transformJsonIntoCategoryList(await result.json());
   } else {
-    console.log("Categories: "+requestParameters.error.message);
+    if (cityId != undefined && cityId !=  "") {
+      console.warn("For categories, I can't parse cityid: ", cityId, "; message: ", requestParameters.error.message);
+    }
     return [];
   }
 }

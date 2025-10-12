@@ -24,9 +24,7 @@ export default async function Page(props: { searchParams?: Promise<{ cat: string
 
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-        <Suspense fallback={<RevenueChartSkeleton />}>
-          <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
-        </Suspense>
+         <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
       </div>
     </main>
   );
