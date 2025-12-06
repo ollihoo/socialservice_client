@@ -1,4 +1,4 @@
-FROM node:24-alpine
+FROM node:25-alpine
 RUN apk add --no-cache python3 py3-pip
 RUN apk add --no-cache make g++ libc6-compat
 RUN npm install -g pnpm
@@ -16,7 +16,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Installiere die Abhängigkeiten
 RUN pnpm install
 RUN pnpm i use-debounce
-
 
 # Baue die Anwendung für die Produktion
 RUN pnpm run build

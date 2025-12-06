@@ -1,8 +1,9 @@
 services:
   frontend:
-    image: docker.io/${DOCKER_USER}/socialservices_frontend:${FE_IMAGE_TAG}
+    image: ${DOCKER_USER}/socialservices_frontend:dev-${FE_IMAGE_TAG}
+    build: ./
     ports:
-      - '3100:3000'
+      - '3000:3000'
     environment:
       - NODE_ENV=development
       - BACKEND_HOST=backend
