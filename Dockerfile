@@ -1,5 +1,4 @@
 FROM node:25-alpine
-RUN apk add --no-cache python3 py3-pip
 RUN apk add --no-cache make g++ libc6-compat
 RUN npm install -g pnpm
 
