@@ -1,17 +1,25 @@
 services:
   frontend:
-    image: ${DOCKER_USER}/socialservices_frontend:dev-${FE_IMAGE_TAG}
-    build: ./
+    build:
+      dockerfile: ./docker/dev/Dockerfile
+      context: .
     ports:
       - '3000:3000'
+    volumes:
+      - '.:/app:rw'
+      - /app/node_modules
+      - /app/.git
+      - /app/.idea
+      - /app/.github
     environment:
       - NODE_ENV=development
       - BACKEND_HOST=backend
       - BACKEND_PORT=${BACKEND_PORT}
+    command: pnpm run dev
 
   backend:
     image: ${DOCKER_USER}/socialservice_backend:${BE_IMAGE_TAG}
     volumes:
       - './docker/backend:/app/conf:rw'
     ports:
-      - '8080:8080'
+      - '${BACKEND_PORT}:${BACKEND_PORT}'

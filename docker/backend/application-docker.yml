@@ -23,3 +23,5 @@ application:
   osm:
     cache:
       path: file:/app/conf/osm_cache/
+    useragent:
+      identifier: de.locating.services.13353
