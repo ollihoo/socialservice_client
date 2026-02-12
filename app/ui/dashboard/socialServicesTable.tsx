@@ -39,7 +39,7 @@ export default async function SocialServicesTable(params: any) {
         {sortedCategories.length >= 3 && (
           <span className="group rounded-md bg-[#8B2500] px-4 py-1 text-sm text-white sm:text-base">
             ...
-            <div className="absolute left-1/2 top-full z-50 mb-2 w-full -translate-x-1/2 transform rounded bg-gray-800 px-2 py-2 text-sm text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+            <div className="pointer-events-none absolute left-1/2 top-full z-50 mb-2 w-full -translate-x-1/2 transform rounded bg-gray-800 px-2 py-2 text-sm text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
               <div className="flex flex-wrap gap-2">
                 {sortedCategories.map((entry: Category) => (
                   <span

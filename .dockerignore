@@ -3,6 +3,7 @@ npm-debug.log
 .dockerignore
 .gitignore
 .git
+.github
 doc
 .env*
 create_release_with_docker.sh

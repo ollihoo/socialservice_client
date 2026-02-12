@@ -1,6 +1,21 @@
+management:
+  influx:
+    metrics:
+      export:
+        enabled: false
+
 spring:
   datasource:
     url: 'jdbc:sqlite:/app/conf/db/socialservices.db'
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: false
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+  flyway:
+    baseline-on-migrate: true
 
 application:
   tsv:
@@ -9,10 +24,4 @@ application:
     cache:
       path: file:/app/conf/osm_cache/
     useragent:
-      identifier: de.locating.services.frontend.13353
-
-management:
- influx:
-    metrics:
-      export:
-        enabled: false
+      identifier: de.locating.services.13353

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Logo from '@/ui/logo';
+import Logo from './ui/logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 
 export default function Page() {

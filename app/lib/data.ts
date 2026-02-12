@@ -1,8 +1,9 @@
-import {Category, City, SocialService} from './definitions';
+import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from './definitions';
 import {createUrl, doAPICall} from './utils';
 
-export async function fetchSocialServices(category: string, city: string) {
-  function createSocialServices(input: any) {
+export async function fetchSocialServices(categoryId: string, cityId: string) {
+
+  function transformJsonIntoSocialServicesList(input: any) {
     const resultSocialServices: SocialService[] = input.map((item: any) => {
       return {
         id: item.id,
@@ -17,18 +18,27 @@ export async function fetchSocialServices(category: string, city: string) {
     return resultSocialServices;
   }
 
-  if (! category) {
+  const requestParameters = SocialServicesRequest.safeParse(
+    { categoryId: categoryId, cityId: cityId }
+  );
+
+  if (requestParameters.success) {
+    const request = createUrl('/social?ct=')
+      + requestParameters.data.cityId + '&c=' + requestParameters.data.categoryId;
+    const result = await doAPICall(request);
+    return transformJsonIntoSocialServicesList(await result.json());
+  } else {
+    if (cityId != undefined && cityId !== '') {
+      if (categoryId != undefined && categoryId !== '') {
+        console.warn("Stop by parameters while requesting socialservices: ", categoryId, "; ", cityId);
+      }
+    }
     return [];
   }
-
-  const request = createUrl('/social') + (category ? '?c=' + category : '') + (city ? '&ct=' + city : '');
-  const result = await doAPICall(request);
-
-  return createSocialServices(await result.json());
 }
 
-export async function fetchCategories() {
-  function createCategories(input: any) {
+export async function fetchCategories(cityId: any) {
+  const transformJsonIntoCategoryList = function (input: any) {
     const categories: Category[] = input.map((item: any) => {
       return {
         id: item.id,
@@ -36,27 +46,34 @@ export async function fetchCategories() {
       };
     });
     return categories;
-  }
+  };
 
-  const result = await doAPICall(createUrl('/categories'));
-  return createCategories(await result.json());
+  const requestParameters = CategoriesRequest.safeParse(
+    { cityId: cityId }
+  );
+
+  if (requestParameters.success) {
+    const request = createUrl('/categories') + '?ct=' + requestParameters.data.cityId;
+    const result = await doAPICall(request);
+    return transformJsonIntoCategoryList(await result.json());
+  } else {
+    if (cityId != undefined && cityId !=  "") {
+      console.warn("For categories, I can't parse cityid: ", cityId, "; message: ", requestParameters.error.message);
+    }
+    return [];
+  }
 }
 
 export async function fetchCities() {
-  function createCities(input: any) {
+  function transformJsonIntoCityList(input: any) {
     const cities: City[] = input.map((item: any) => {
-      let lat = (item.latitude !== undefined)? item.latitude:null;
-      let lng = (item.longitude !== undefined)? item.longitude:null;
       return {
         id: item.id,
         name: item.name,
-        lat: lat,
-        long: lng,
       };
     });
     return cities;
   }
-
   const result = await doAPICall(createUrl("/cities"));
-  return createCities(await result.json());
+  return transformJsonIntoCityList(await result.json());
 }

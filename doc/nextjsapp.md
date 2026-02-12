@@ -1,6 +1,8 @@
-# NextJs Application
+# Next.js Application
 
-## Some specialties of nextjs
+This is the site of Next.js: https://nextjs.org/
+
+Next.js uses [react](./react.md) and [tailwind](./tailwind.md).
 
 ## Next structure
 

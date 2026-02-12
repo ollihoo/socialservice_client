@@ -11,22 +11,20 @@ export default async function Page(props: { searchParams?: Promise<{ cat: string
   const searchParams = await props.searchParams;
   const selectedCategory: string = searchParams?.cat || '';
   const selectedCity: string = searchParams?.cit || '';
-  const availableCategories: Category[] = await fetchCategories();
+  const availableCategories: Category[] = await fetchCategories(selectedCity);
   const availableCities: City[] = await fetchCities();
 
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl antialiased md:text-2xl`}>
-        Beratungsstellen
+        Beratungsstellen <CitiesDropDown cities={availableCities} />
       </h1>
       <div>
-        <CategoriesDropdown categories={availableCategories} />
-        in <CitiesDropDown cities={availableCities} />
+         <CategoriesDropdown categories={availableCategories} />
+
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-        <Suspense fallback={<RevenueChartSkeleton />}>
-          <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
-        </Suspense>
+         <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
       </div>
     </main>
   );
