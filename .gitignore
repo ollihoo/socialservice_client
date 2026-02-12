@@ -38,5 +38,6 @@ next-env.d.ts
 /docker/backend/Beratungsstellen.tsv
 /.idea/
 .idea/*
-docker/backend
+docker/backend/db
+docker/backend/osm_cache
 package-lock.json

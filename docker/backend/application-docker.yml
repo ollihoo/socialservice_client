@@ -1,7 +1,18 @@
 spring:
   datasource:
-    url: 'jdbc:sqlite:/app/socialservices.db'
+    url: 'jdbc:sqlite:/app/conf/db/socialservices.db'
 
 application:
   tsv:
-    path: file:/app/conf/Beratungsstellen.tsv
+    pattern: file:/app/conf/input/*.tsv
+  osm:
+    cache:
+      path: file:/app/conf/osm_cache/
+    useragent:
+      identifier: de.locating.services.frontend.13353
+
+management:
+ influx:
+    metrics:
+      export:
+        enabled: false
