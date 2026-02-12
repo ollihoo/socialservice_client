@@ -1,13 +1,12 @@
 services:
   frontend:
     build:
-      context: . #if your Dockerfile is not at the same level change the path here (./frontend)
-    restart: always
-    command: pnpm dev
+      context: .
     volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+      - ./:/app:rw
+#      - ./package.json:/app/package.json:rw
+#      - ./docker/frontend/transfer:/app/transfer:rw
+#      - /app/.next
     ports:
       - '3100:3000'
     environment:
