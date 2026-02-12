@@ -1,14 +1,14 @@
-import { lusitana } from '../ui/fonts';
-import CitiesDropDown from '../ui/citiesDropdown';
-import { City } from '../lib/definitions';
-import { fetchCities } from '../lib/data';
-import InputForms from "@/app/ui/adminservices/inputForms";
+import { lusitana } from '@/ui/fonts';
+import CitiesDropDown from '@/ui/citiesDropdown';
+import { City } from '@/lib/definitions';
+import { fetchCities } from '@/lib/data';
+import InputForms from "@/ui/adminservices/inputForms";
 
 export default async function Page(props: { searchParams?: Promise<{ cat: string, cit: string }> }) {
   const searchParams = await props.searchParams;
   const selectedCity: string = searchParams?.cit || '';
   let availableCities: City[] = await fetchCities();
-  availableCities.push( { id: 0, name: "Andere Städte" });
+  availableCities.push( {  id: 0, name: "Andere Städte", lat: 0, lon: 0});
 
   return (
     <main>

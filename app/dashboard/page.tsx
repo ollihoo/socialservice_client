@@ -1,11 +1,9 @@
-import { lusitana } from '../ui/fonts';
-import SocialServicesTable from '../ui/dashboard/socialServicesTable';
-import { Suspense } from 'react';
-import { RevenueChartSkeleton } from '../ui/skeletons';
-import CategoriesDropdown from '../ui/categoriesDropdown';
-import CitiesDropDown from '../ui/citiesDropdown';
-import { Category, City } from '../lib/definitions';
-import {fetchCategories, fetchCities} from '../lib/data';
+import { lusitana } from '@/ui/fonts';
+import SocialServicesTable from '@/ui/dashboard/socialServicesTable';
+import CategoriesDropdown from '@/ui/categoriesDropdown';
+import CitiesDropDown from '@/ui/citiesDropdown';
+import { Category, City } from '@/lib/definitions';
+import {fetchCategories, fetchCities} from '@/lib/data';
 
 export default async function Page(props: { searchParams?: Promise<{ cat: string, cit: string }> }) {
   const searchParams = await props.searchParams;
