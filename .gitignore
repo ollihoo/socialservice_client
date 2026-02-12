@@ -38,3 +38,5 @@ next-env.d.ts
 /docker/backend/Beratungsstellen.tsv
 /.idea/
 .idea/*
+docker/backend
+package-lock.json
