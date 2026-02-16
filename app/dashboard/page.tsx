@@ -14,12 +14,16 @@ export default async function Page(props: { searchParams?: Promise<{ cat: string
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-xl antialiased md:text-2xl`}>
-        Beratungsstellen <CitiesDropDown cities={availableCities} />
-      </h1>
-      <div>
-         <CategoriesDropdown categories={availableCategories} />
-
+      <h2 className={`${lusitana.className} mb-4 text-xl antialiased md:text-2xl`}>
+        Beratungsstellen
+      </h2>
+      <div className="flex flex-row items-center gap-1 p-7 nd:flex-row md:gap-8 rounded-2xl bg-gray-300">
+        <div>
+          <CitiesDropDown cities={availableCities} />
+        </div>
+        <div>
+           <CategoriesDropdown categories={availableCategories} />
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
          <SocialServicesTable category={ selectedCategory } city={selectedCity}  />
