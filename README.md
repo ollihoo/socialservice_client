@@ -19,7 +19,7 @@ Ask your fellows for the right docker repo and current tags.
 This app uses a separate backend. This backed needs basic data. This data is here:
 
     cd ./docker/backend/input
-    cp Beratungsstellen_TEMPLATE.tsv Beratungsstellen.csv
+    cp Beratungsstellen_TEMPLATE.tsv Beratungsstellen.tsv
 
 The shown tsv file ("tab-separated values") just contains a basic data setup. 
 This tsv file is just a very basic example. Ask your fellows, where to get complete data.
