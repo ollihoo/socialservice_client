@@ -1,25 +1,16 @@
 services:
   frontend:
     build:
-      dockerfile: ./docker/dev/Dockerfile
       context: .
     ports:
-      - '3000:3000'
-    volumes:
-      - '.:/app:rw'
-      - /app/node_modules
-      - /app/.git
-      - /app/.idea
-      - /app/.github
+      - '3100:3000'
     environment:
-      - NODE_ENV=development
       - BACKEND_HOST=backend
       - BACKEND_PORT=${BACKEND_PORT}
-    command: pnpm run dev
 
   backend:
     image: ${DOCKER_USER}/socialservice_backend:${BE_IMAGE_TAG}
     volumes:
-      - './docker/backend:/app/conf:rw'
+      - './docker/backend/:/app/conf'
     ports:
-      - '${BACKEND_PORT}:${BACKEND_PORT}'
+      - '8080:8080'

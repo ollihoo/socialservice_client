@@ -8,6 +8,8 @@ export type Category = {
 export type City = {
   id: number;
   name: string;
+  lat: number;
+  lon: number;
 };
 
 export type SocialService = {

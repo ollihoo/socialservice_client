@@ -41,3 +41,6 @@ next-env.d.ts
 !/docker/backend/osm-cache/CACHE
 /.idea/
 .idea/*
+docker/backend/db
+docker/backend/osm_cache
+package-lock.json
