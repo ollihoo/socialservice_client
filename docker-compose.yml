@@ -2,15 +2,9 @@ services:
   frontend:
     build:
       context: .
-    volumes:
-      - ./:/app:rw
-#      - ./package.json:/app/package.json:rw
-#      - ./docker/frontend/transfer:/app/transfer:rw
-#      - /app/.next
     ports:
       - '3100:3000'
     environment:
-      - NODE_ENV=development
       - BACKEND_HOST=backend
       - BACKEND_PORT=${BACKEND_PORT}
 

@@ -9,7 +9,10 @@ doc
 create_release_with_docker.sh
 docker-compose.yml
 Dockerfile
+docker
 *.md
 *.iml
 .idea
-.next
+.next/
+next.config.ts
+
