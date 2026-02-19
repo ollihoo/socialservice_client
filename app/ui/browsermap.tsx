@@ -24,8 +24,8 @@ const Browsermap: React.FC<CityMapComponentProps> = ( { cities }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
       />
-      { cities.map ((city) => (
-        <Marker position={[city.lat, city.lon]}>
+      { cities.map ((city, index) => (
+        <Marker key={index} position={[city.lat, city.lon]}>
           <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
 
         </Marker>
