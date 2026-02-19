@@ -13,18 +13,24 @@ L.Icon.Default.mergeOptions({
 });
 
 interface CityMapComponentProps {
-  city: City;
+  cities: City[];
 }
 
-const Browsermap: React.FC<CityMapComponentProps> = ( { city }) => {
+const Browsermap: React.FC<CityMapComponentProps> = ( { cities }) => {
   return (
     <MapContainer center={[51.5354, 9.920]} zoom={6} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
       />
-      <Marker position={[city.lat, city.lon]}>
-        <Popup>{city.name}</Popup>
+      ( if (cities[0].lat && cities[0].lng) (
+          <Marker position={[cities[0].lat, cities[0].lon]}>
+            <Popup>{cities[0].name}</Popup>
+          </Marker>
+        )
+      )
+      <Marker position={[cities[0].lat, cities[0].lon]}>
+        <Popup>{cities[0].name}</Popup>
       </Marker>
     </MapContainer>
   );

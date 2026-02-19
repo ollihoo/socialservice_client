@@ -66,10 +66,13 @@ export async function fetchCategories(cityId: any) {
 
 export async function fetchCities() {
   function transformJsonIntoCityList(input: any) {
+    console.log(input);
     const cities: City[] = input.map((item: any) => {
       return {
         id: item.id,
         name: item.name,
+        lat: item.latitude,
+        lon: item.longitude
       };
     });
     return cities;
