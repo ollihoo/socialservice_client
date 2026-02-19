@@ -70,6 +70,8 @@ export async function fetchCities() {
       return {
         id: item.id,
         name: item.name,
+        lat: item.latitude,
+        lon: item.longitude
       };
     });
     return cities;
