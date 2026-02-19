@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import {City} from "@/lib/definitions";
+import Link from "next/link";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -23,15 +24,12 @@ const Browsermap: React.FC<CityMapComponentProps> = ( { cities }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
       />
-      ( if (cities[0].lat && cities[0].lng) (
-          <Marker position={[cities[0].lat, cities[0].lon]}>
-            <Popup>{cities[0].name}</Popup>
-          </Marker>
-        )
-      )
-      <Marker position={[cities[0].lat, cities[0].lon]}>
-        <Popup>{cities[0].name}</Popup>
-      </Marker>
+      { cities.map ((city) => (
+        <Marker position={[city.lat, city.lon]}>
+          <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
+
+        </Marker>
+      ))}
     </MapContainer>
   );
 };
