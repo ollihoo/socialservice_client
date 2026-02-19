@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Logo from '@/ui/logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Map from "@/ui/map";
+import Citymap from "@/ui/citymap";
 
 export default function Page() {
   return (
@@ -21,7 +21,7 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <Map></Map>
+          <Citymap></Citymap>
         </div>
       </div>
     </main>
