@@ -1,6 +1,6 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import {City} from "@/lib/definitions";
@@ -17,21 +17,26 @@ interface CityMapComponentProps {
   cities: City[];
 }
 
-const Browsermap: React.FC<CityMapComponentProps> = ( { cities }) => {
-  return (
-    <MapContainer center={[51.5354, 9.920]} zoom={6} style={{ height: '100%', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-      />
-      { cities.map ((city, index) => (
-        <Marker key={index} position={[city.lat, city.lon]}>
-          <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
+interface BrowsermapProps {
+  cities?: City[]
+}
 
-        </Marker>
-      ))}
-    </MapContainer>
-  );
+export default function Browsermap(property: BrowsermapProps) {
+  if (property.cities) {
+    return (
+      <MapContainer center={[51.5354, 9.920]} zoom={6} style={{height: '100%', width: '100%'}}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+        />
+        {property.cities.map((city, index) => (
+          <Marker key={index} position={[city.lat, city.lon]}>
+            <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
+
+          </Marker>
+        ))}
+      </MapContainer>
+    );
+  }
+  return ;
 };
-
-export default Browsermap;

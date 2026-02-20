@@ -1,6 +1,6 @@
-import { City } from '../../lib/definitions';
+import { City } from '@/lib/definitions';
 import Link from "next/link";
-import { getInputFormConfig } from '../../lib/utils';
+import { getInputFormConfig } from '@/lib/server_utils';
 
 export default async function InputForms(params: any) {
   const selectedCityId: number = params? parseCityId(params.city) : NaN;
