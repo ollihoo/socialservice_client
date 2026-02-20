@@ -4,8 +4,7 @@ npm-debug.log
 .gitignore
 .git
 .github
-doc
-.env*
+docs
 create_release_with_docker.sh
 docker-compose.yml
 Dockerfile

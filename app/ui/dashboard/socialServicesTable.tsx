@@ -1,6 +1,6 @@
-import { Category, SocialService } from '../../lib/definitions';
+import { Category, SocialService } from '@/lib/definitions';
 import Link from 'next/link';
-import { fetchSocialServices } from '../../lib/data';
+import { fetchSocialServices } from '@/lib/data';
 
 export default async function SocialServicesTable(params: any) {
   const selCategory: string = params?.category || '';
