@@ -18,23 +18,6 @@ const Popup = dynamic(
   () => import('react-leaflet').then(mod => mod.Popup), { ssr: false }
 );
 
-
-/*
-const L = dynamic(
-  () => import('leaflet').then(mod => ), { ssr: false }
-);
-
-
-//  import L from 'leaflet';
-
-delete (L.Default.prototype as any)._getIconUrl;
-L.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-});
-*/
-
 interface BrowsermapProps {
   cities?: City[]
 }
