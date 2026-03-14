@@ -2,7 +2,7 @@
 
 ## Frontend
 
-This app runs with [pnpm(ext. link)](https://pnpm.io/) and [Next.js](./nextjsapp.md). 
+This app runs with [npm(ext. link)](https://pnpm.io/) and [Next.js](./nextjsapp.md). 
 If it's not installed on your development server yet, do so.
 
 For Mac and homebrew:
