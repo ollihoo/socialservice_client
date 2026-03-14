@@ -14,7 +14,7 @@ fi
 starttime=$(date +%s)
 IMAGE_TAG=$(date +%y%m%d%H%M)
 
-docker buildx build --platform linux/amd64 -t ${DOCKER_USER}/socialservices_frontend:$IMAGE_TAG .
+docker build -t ${DOCKER_USER}/socialservices_frontend:${IMAGE_TAG} .
 
 if [ $? -eq 0 ]; then
     echo "✅ docker build successful"

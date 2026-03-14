@@ -22,6 +22,17 @@ interface BrowsermapProps {
   cities?: City[]
 }
 
+function createMarker (city: City, index: number ) {
+  if (city.lat && city.lon)
+    return (
+      <Marker key={index} position={[city.lat, city.lon]}>
+        <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
+
+      </Marker>
+    );
+  else return;
+}
+
 export default function Browsermap(property: BrowsermapProps) {
   if (property.cities) {
     return (
@@ -30,12 +41,7 @@ export default function Browsermap(property: BrowsermapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
         />
-        {property.cities.map((city, index) => (
-          <Marker key={index} position={[city.lat, city.lon]}>
-            <Popup><Link href={"dashboard?cit=" + city.id}>{city.name}</Link></Popup>
-
-          </Marker>
-        ))}
+        {property.cities.map((city, index) => createMarker(city, index))}
       </MapContainer>
     );
   }
