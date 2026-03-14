@@ -3,7 +3,7 @@ import Logo from '@/ui/logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Citymap from "@/ui/citymap";
 
-export default function Page() {
+export default async function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-red-800 p-4 md:h-52">

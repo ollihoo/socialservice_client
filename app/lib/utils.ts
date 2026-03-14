@@ -8,6 +8,7 @@ export function doAPICall(request: string): any {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store'
     });
   } catch (error: any) {
     console.log('problem to fetch data: ', error.message);
