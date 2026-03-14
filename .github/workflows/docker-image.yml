@@ -22,4 +22,4 @@ jobs:
       - name: create dummy .env
         run: echo DOCKER_USER=${{ secrets.DOCKER_USER }} > .env
       - name: Build the Docker image
-        run: ./create_release_with_docker.sh
+        run: ./create_release_with_docker.sh deploy
