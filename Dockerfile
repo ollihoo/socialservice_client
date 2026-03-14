@@ -5,16 +5,16 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-
 FROM base AS builder
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+COPY .env.example .env
 
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=dev
-RUN npm run build --only=production
+ENV NODE_ENV=production
+RUN npm run build
 
 
 FROM deps AS runner

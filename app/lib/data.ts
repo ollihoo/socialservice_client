@@ -1,5 +1,5 @@
-import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from './definitions';
-import {createUrl, doAPICall} from './utils';
+import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from '@/lib/definitions';
+import {createUrl, doAPICall} from '@/lib/utils';
 
 export async function fetchSocialServices(categoryId: string, cityId: string) {
 

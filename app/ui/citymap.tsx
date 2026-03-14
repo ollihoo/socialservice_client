@@ -4,5 +4,5 @@ import {fetchCities} from "@/lib/data";
 
 export default async function cityMapGenerator() {
     const availableCities: City[] = await fetchCities();
-    return (<Browsermap cities={availableCities}></Browsermap>);
+    return <Browsermap cities={availableCities}></Browsermap>;
 }
