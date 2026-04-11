@@ -1,5 +1,5 @@
 'use client';
-import { Category } from '../lib/definitions';
+import { Category } from '@/lib/definitions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function CategoriesDropdown({ categories }: { categories: Category[] }) {
