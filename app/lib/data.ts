@@ -38,6 +38,7 @@ export async function fetchSocialServices(categoryId: string, cityId: string) {
 }
 
 export async function fetchCategories(cityId: any) {
+
   const transformJsonIntoCategoryList = function (input: any) {
     const categories: Category[] = input.map((item: any) => {
       return {
@@ -52,8 +53,14 @@ export async function fetchCategories(cityId: any) {
     { cityId: cityId }
   );
 
+  function toggleRequestParameters(cityId: number) : string {
+    return (cityId == -5) ?
+      '/onlinecategories':
+      '/categories?ct=' + cityId;
+  }
+
   if (requestParameters.success) {
-    const request = createUrl('/categories') + '?ct=' + requestParameters.data.cityId;
+    const request = createUrl(toggleRequestParameters(requestParameters.data.cityId));
     const result = await doAPICall(request);
     return transformJsonIntoCategoryList(await result.json());
   } else {

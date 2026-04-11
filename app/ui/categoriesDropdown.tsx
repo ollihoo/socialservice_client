@@ -19,7 +19,7 @@ export default function CategoriesDropdown({ categories }: { categories: Categor
   };
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="relative flex flex-1 shrink-0">
       <div>
         <label htmlFor="categoryDropdown" className="sr-only">
           Choose a category;

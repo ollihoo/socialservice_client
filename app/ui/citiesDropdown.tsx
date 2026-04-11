@@ -21,17 +21,18 @@ export default function CitiesDropdown({ cities }: { cities: City[] }) {
   return (
     <div className="relative flex flex-1 shrink-0">
       <div>
-        <label htmlFor="categoryDropdown" className="sr-only">
-          Choose a category;
+        <label htmlFor="cityDropdown" className="sr-only">
+          Choose a category
         </label>
         <select
-          id="categoryDropdown"
+          id="cityDropdown"
           value={searchParams.get(QUERY_PARAM)?.toString()}
           onChange={handleSelection}
         >
           <option value="">
-            Welche Stadt?
+            Onlineberatung oder Stadtsuche?
           </option>
+          <option key={'online'} value={-5}>-- Onlineberatung --</option>
           {cities.map((city: City) => {
             return (
               <option key={city.id} value={city.id}>
