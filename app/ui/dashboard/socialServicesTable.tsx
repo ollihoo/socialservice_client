@@ -5,13 +5,15 @@ import {fetchOnlineSocialServices, fetchSocialServices} from '@/lib/data';
 export default async function SocialServicesTable(params: any) {
   const selCategory: string = params?.category || '';
   const selCity: string = params?.city || '';
-  const unsortedSocialservices = (selCity != '' && selCity == '-5')?
+  const onlineServices: boolean = (selCity != '' && selCity == '-5');
+
+  const unsortedSocialServices = (onlineServices)?
     await fetchOnlineSocialServices(selCategory):
     await fetchSocialServices(selCategory, selCity);
 
-  const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
+  const socialServices = unsortedSocialServices.sort((a, b) => a.name.localeCompare(b.name));
 
-  function getServiceLink(socialService: SocialService) {
+  function showServiceLink(socialService: SocialService) {
     if (socialService.website != null) {
       return (
         <span className="text-sm text-gray-500 sm:block">
@@ -60,7 +62,7 @@ export default async function SocialServicesTable(params: any) {
     );
   }
 
-  function getListOfServices(socialServices: SocialService[]) {
+  function showListOfServices(socialServices: SocialService[]) {
     return (
       <>
         {socialServices.map((socialservice) => {
@@ -73,7 +75,7 @@ export default async function SocialServicesTable(params: any) {
                     <p className="mb-1 text-xl">
                       {socialservice.address}, {socialservice.postCode} {socialservice.city}
                     </p>
-                    <p className="mb-4 text-gray-600">{getServiceLink(socialservice)}</p>
+                    <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
                   </div>
                 </div>
@@ -85,5 +87,27 @@ export default async function SocialServicesTable(params: any) {
     );
   }
 
-  return <>{getListOfServices(socialServices)}</>;
+  function showListOfOnlineServices(socialServices: SocialService[]) {
+    return (
+      <>
+        {socialServices.map((socialservice) => {
+          return (
+            <div className="col-span-1" key={socialservice.id}>
+              <div className="flex grow flex-col justify-between rounded-xl">
+                <div className="bg-white">
+                  <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
+                    <h2 className="mb-2 text-2xl font-bold sm:text-2xl">{socialservice.name}</h2>
+                    <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+
+  return <>{ (onlineServices)? showListOfOnlineServices(socialServices) : showListOfServices(socialServices) }</>;
 }
