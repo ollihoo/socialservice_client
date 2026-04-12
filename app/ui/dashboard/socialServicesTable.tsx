@@ -1,11 +1,14 @@
 import { Category, SocialService } from '@/lib/definitions';
 import Link from 'next/link';
-import { fetchSocialServices } from '@/lib/data';
+import {fetchOnlineSocialServices, fetchSocialServices} from '@/lib/data';
 
 export default async function SocialServicesTable(params: any) {
   const selCategory: string = params?.category || '';
   const selCity: string = params?.city || '';
-  const unsortedSocialservices = await fetchSocialServices(selCategory, selCity);
+  const unsortedSocialservices = (selCity != '' && selCity == '-5')?
+    await fetchOnlineSocialServices(selCategory):
+    await fetchSocialServices(selCategory, selCity);
+
   const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
 
   function getServiceLink(socialService: SocialService) {

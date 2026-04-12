@@ -1,32 +1,53 @@
-import {Category, City, SocialService, SocialServicesRequest, CategoriesRequest} from '@/lib/definitions';
+import {
+  Category,
+  City,
+  SocialService,
+  SocialServicesRequest,
+  CategoriesRequest,
+  OnlineSocialServicesRequest
+} from '@/lib/definitions';
 import {createUrl, doAPICall} from '@/lib/utils';
 
-export async function fetchSocialServices(categoryId: string, cityId: string) {
 
-  function transformJsonIntoSocialServicesList(input: any) {
-    const resultSocialServices: SocialService[] = input.map((item: any) => {
-      return {
-        id: item.id,
-        name: item.name,
-        address: item.address,
-        postCode: item.postCode,
-        city: item.city,
-        website: item.website,
-        categories: item.categories,
-      };
-    });
-    return resultSocialServices;
-  }
+function transformJsonIntoSocialServicesList(input: any) {
+  const resultSocialServices: SocialService[] = input.map((item: any) => {
+    return {
+      id: item.id,
+      name: item.name,
+      address: item.address,
+      postCode: item.postCode,
+      city: item.city,
+      website: item.website,
+      categories: item.categories,
+    };
+  });
+  return resultSocialServices;
+}
+
+const createSocialApiRequest = function (cityId: number, categoryId: number) {
+  return createUrl('/social?ct=') + cityId + '&c=' + categoryId;
+}
+const createOnlineSocialApiRequest = function (categoryId: number) {
+  return createUrl('/social/online?ct=') + '&c=' + categoryId;
+}
+const createCategoryApiRequest = function (cityId: number) : string {
+  return createUrl((cityId == -5)? '/categories/online': '/categories?ct=' + cityId);
+}
+
+
+export async function fetchSocialServices(categoryId: string, cityId: string) {
 
   const requestParameters = SocialServicesRequest.safeParse(
     { categoryId: categoryId, cityId: cityId }
   );
 
   if (requestParameters.success) {
-    const request = createUrl('/social?ct=')
-      + requestParameters.data.cityId + '&c=' + requestParameters.data.categoryId;
-    const result = await doAPICall(request);
-    return transformJsonIntoSocialServicesList(await result.json());
+    const response: Response = await doAPICall(createSocialApiRequest(requestParameters.data.cityId, requestParameters.data.categoryId));
+    if (response.ok) {
+      return transformJsonIntoSocialServicesList(await response.json());
+    }
+    console.warn("Unknown social service response: ", response);
+    return [];
   } else {
     if (cityId != undefined && cityId !== '') {
       if (categoryId != undefined && categoryId !== '') {
@@ -36,6 +57,28 @@ export async function fetchSocialServices(categoryId: string, cityId: string) {
     return [];
   }
 }
+
+export async function fetchOnlineSocialServices(categoryId: string): Promise<SocialService[]> {
+
+  const requestParameters = OnlineSocialServicesRequest.safeParse(
+    { categoryId: categoryId}
+  );
+
+  if (requestParameters.success) {
+    const response: Response = await doAPICall(createOnlineSocialApiRequest(requestParameters.data.categoryId));
+    if (response.ok) {
+      return transformJsonIntoSocialServicesList(await response.json());
+    }
+    console.warn("Unknown online social service response: ", response);
+    return [];
+  } else {
+      if (categoryId != undefined && categoryId !== '') {
+        console.warn("Stop by parameters while requesting socialservices: ", categoryId);
+      }
+    }
+    return [];
+}
+
 
 export async function fetchCategories(cityId: any) {
 
@@ -53,16 +96,13 @@ export async function fetchCategories(cityId: any) {
     { cityId: cityId }
   );
 
-  function toggleRequestParameters(cityId: number) : string {
-    return (cityId == -5) ?
-      '/onlinecategories':
-      '/categories?ct=' + cityId;
-  }
-
   if (requestParameters.success) {
-    const request = createUrl(toggleRequestParameters(requestParameters.data.cityId));
-    const result = await doAPICall(request);
-    return transformJsonIntoCategoryList(await result.json());
+    const result: Response = await doAPICall(createCategoryApiRequest(requestParameters.data.cityId));
+    if (result.ok) {
+      return transformJsonIntoCategoryList(await result.json());
+    }
+    console.log("Unknown response:\r\n", result);
+    return [];
   } else {
     if (cityId != undefined && cityId !=  "") {
       console.warn("For categories, I can't parse cityid: ", cityId, "; message: ", requestParameters.error.message);
