@@ -29,10 +29,6 @@ export default function CitiesDropdown({ cities }: { cities: City[] }) {
           value={searchParams.get(QUERY_PARAM)?.toString()}
           onChange={handleSelection}
         >
-          <option value="">
-            Onlineberatung oder Stadtsuche?
-          </option>
-          <option key={'online'} value={-5}>-- Onlineberatung --</option>
           {cities.map((city: City) => {
             return (
               <option key={city.id} value={city.id}>
