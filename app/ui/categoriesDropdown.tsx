@@ -1,5 +1,5 @@
 'use client';
-import { Category } from '../lib/definitions';
+import { Category } from '@/lib/definitions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function CategoriesDropdown({ categories }: { categories: Category[] }) {
@@ -19,7 +19,7 @@ export default function CategoriesDropdown({ categories }: { categories: Categor
   };
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="relative flex flex-1 shrink-0">
       <div>
         <label htmlFor="categoryDropdown" className="sr-only">
           Choose a category;

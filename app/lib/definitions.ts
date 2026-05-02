@@ -48,6 +48,10 @@ export const SocialServicesRequest = z.object({
   cityId: getStringToIntTransformer(),
 });
 
+export const OnlineSocialServicesRequest = z.object({
+  categoryId: getStringToIntTransformer(),
+});
+
 export const CategoriesRequest = z.object({
   cityId: getStringToIntTransformer(),
 });

@@ -1,14 +1,19 @@
 import { Category, SocialService } from '@/lib/definitions';
 import Link from 'next/link';
-import { fetchSocialServices } from '@/lib/data';
+import {fetchOnlineSocialServices, fetchSocialServices} from '@/lib/data';
 
 export default async function SocialServicesTable(params: any) {
   const selCategory: string = params?.category || '';
   const selCity: string = params?.city || '';
-  const unsortedSocialservices = await fetchSocialServices(selCategory, selCity);
-  const socialServices = unsortedSocialservices.sort((a, b) => a.name.localeCompare(b.name));
+  const onlineServices: boolean = (selCity != '' && selCity == '-5');
 
-  function getServiceLink(socialService: SocialService) {
+  const unsortedSocialServices = (onlineServices)?
+    await fetchOnlineSocialServices(selCategory):
+    await fetchSocialServices(selCategory, selCity);
+
+  const socialServices = unsortedSocialServices.sort((a, b) => a.name.localeCompare(b.name));
+
+  function showServiceLink(socialService: SocialService) {
     if (socialService.website != null) {
       return (
         <span className="text-sm text-gray-500 sm:block">
@@ -57,7 +62,7 @@ export default async function SocialServicesTable(params: any) {
     );
   }
 
-  function getListOfServices(socialServices: SocialService[]) {
+  function showListOfServices(socialServices: SocialService[]) {
     return (
       <>
         {socialServices.map((socialservice) => {
@@ -66,11 +71,11 @@ export default async function SocialServicesTable(params: any) {
               <div className="flex grow flex-col justify-between rounded-xl">
                 <div className="bg-white">
                   <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
-                    <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{socialservice.name}</h2>
-                    <p className="mb-1 text-xl">
+                    <h2 className="mb-2 text-xl font-bold sm:text-xl">{socialservice.name}</h2>
+                    <p className="mb-1 text-l">
                       {socialservice.address}, {socialservice.postCode} {socialservice.city}
                     </p>
-                    <p className="mb-4 text-gray-600">{getServiceLink(socialservice)}</p>
+                    <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
                   </div>
                 </div>
@@ -82,5 +87,27 @@ export default async function SocialServicesTable(params: any) {
     );
   }
 
-  return <>{getListOfServices(socialServices)}</>;
+  function showListOfOnlineServices(socialServices: SocialService[]) {
+    return (
+      <>
+        {socialServices.map((socialservice) => {
+          return (
+            <div className="col-span-1" key={socialservice.id}>
+              <div className="flex grow flex-col justify-between rounded-xl">
+                <div className="bg-white">
+                  <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
+                    <h2 className="mb-2 text-xl font-bold sm:text-xl">{socialservice.name}</h2>
+                    <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+
+  return <>{ (onlineServices)? showListOfOnlineServices(socialServices) : showListOfServices(socialServices) }</>;
 }
