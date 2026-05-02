@@ -71,8 +71,8 @@ export default async function SocialServicesTable(params: any) {
               <div className="flex grow flex-col justify-between rounded-xl">
                 <div className="bg-white">
                   <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
-                    <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{socialservice.name}</h2>
-                    <p className="mb-1 text-xl">
+                    <h2 className="mb-2 text-xl font-bold sm:text-xl">{socialservice.name}</h2>
+                    <p className="mb-1 text-l">
                       {socialservice.address}, {socialservice.postCode} {socialservice.city}
                     </p>
                     <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
@@ -96,7 +96,7 @@ export default async function SocialServicesTable(params: any) {
               <div className="flex grow flex-col justify-between rounded-xl">
                 <div className="bg-white">
                   <div className="relative my-2 w-full max-w-3xl rounded-lg bg-white p-6 shadow-lg">
-                    <h2 className="mb-2 text-2xl font-bold sm:text-2xl">{socialservice.name}</h2>
+                    <h2 className="mb-2 text-xl font-bold sm:text-xl">{socialservice.name}</h2>
                     <p className="mb-4 text-gray-600">{showServiceLink(socialservice)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">{showCategories(socialservice)}</div>
                   </div>
