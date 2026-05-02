@@ -4,7 +4,7 @@ import {
   SocialService,
   SocialServicesRequest,
   CategoriesRequest,
-  OnlineSocialServicesRequest
+  OnlineSocialServicesRequest,
 } from '@/lib/definitions';
 import {createUrl, doAPICall} from '@/lib/utils';
 
@@ -51,8 +51,10 @@ const createOnlineSocialApiRequest = function (categoryId: number) {
 }
 const createCategoryApiRequest = function (cityId: number) : string {
   if (cityId === -5) {
+    console.log("Online");
     return createUrl('/categories/online');
   }
+  console.log("Classic Cat by Cit " + cityId);
   return createUrl('/categories?ct=' + cityId);
 }
 

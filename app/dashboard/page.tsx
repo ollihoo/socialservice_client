@@ -6,7 +6,7 @@ import { Category, City } from '@/lib/definitions';
 import {fetchCategories, fetchCities} from '@/lib/data';
 
 async function getAvailableCitiesAndSpecialCategories() {
-  const onlineBeratung: City = {id: -5, name: "Onlineberatung", lat: 0, lon: 0};
+  const onlineBeratung: City = {id: -5, name: "-- Onlineberatung --", lat: 0, lon: 0};
   const citiesFromDb = await fetchCities();
   const availableCities: City[] = [onlineBeratung, ...citiesFromDb];
   return availableCities;
