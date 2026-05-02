@@ -5,12 +5,19 @@ import CitiesDropDown from '@/ui/citiesDropdown';
 import { Category, City } from '@/lib/definitions';
 import {fetchCategories, fetchCities} from '@/lib/data';
 
+async function getAvailableCitiesAndSpecialCategories() {
+  const onlineBeratung: City = {id: -5, name: "Onlineberatung", lat: 0, lon: 0};
+  const citiesFromDb = await fetchCities();
+  const availableCities: City[] = [onlineBeratung, ...citiesFromDb];
+  return availableCities;
+}
+
 export default async function Page(props: { searchParams?: Promise<{ cat: string, cit: string }> }) {
   const searchParams = await props.searchParams;
   const selectedCategory: string = searchParams?.cat || '';
   const selectedCity: string = searchParams?.cit || '';
   const availableCategories: Category[] = await fetchCategories(selectedCity);
-  const availableCities: City[] = await fetchCities();
+  const availableCities = await getAvailableCitiesAndSpecialCategories();
 
   return (
     <main>
