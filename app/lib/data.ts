@@ -50,12 +50,7 @@ const createOnlineSocialApiRequest = function (categoryId: number) {
   return createUrl('/social/online?ct=') + '&c=' + categoryId;
 }
 const createCategoryApiRequest = function (cityId: number) : string {
-  if (cityId === -5) {
-    console.log("Online");
-    return createUrl('/categories/online');
-  }
-  console.log("Classic Cat by Cit " + cityId);
-  return createUrl('/categories?ct=' + cityId);
+  return createUrl((cityId === -5)?'/categories/online': '/categories?ct=' + cityId);
 }
 
 export async function fetchSocialServices(categoryId: string, cityId: string) {
